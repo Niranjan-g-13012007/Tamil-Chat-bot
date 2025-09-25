@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>தமிழ் சாட்பாட் - Tamil Chatbot</title>
-  <!-- Tailwind CSS -->
+ 
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -88,15 +88,15 @@
   </style>
 </head>
 <body class="flex flex-col min-h-screen">
-  <!-- Live Video Background -->
+  
   <video autoplay muted loop class="background-video">
-    <!-- Placeholder video. This could be replaced with a video of a Tamil landscape or temple. -->
+    
     <source src="video.mp4" type="video/mp4">
     உங்கள் உலாவியில் வீடியோ ஆதரவு இல்லை.
   </video>
   <div class="video-overlay"></div>
 
-  <!-- 🌟 Header -->
+ 
   <header class="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-500 text-white shadow-lg">
     <div class="max-w-6xl mx-auto flex justify-between items-center p-5">
       <div>
@@ -109,11 +109,11 @@
     </div>
   </header>
 
-  <!-- 💬 Chat Section -->
+
   <main class="flex-1 flex items-center justify-center p-4">
     <div class="w-full max-w-2xl overflow-hidden bg-white/90 backdrop-blur-sm rounded-3xl shadow-2xl flex flex-col h-[80vh] sm:h-[70vh] border border-gray-200">
       
-      <!-- Chat History -->
+   
       <div id="chat-history" class="flex-grow p-6 overflow-y-auto space-y-4">
         <div class="flex justify-start">
           <div class="bg-gray-200 text-gray-800 p-3 rounded-xl max-w-xs shadow-sm">
@@ -122,7 +122,7 @@
         </div>
       </div>
 
-      <!-- Message Input -->
+
       <div class="p-6 bg-gradient-to-r from-gray-50 to-gray-100 border-t border-gray-200">
         <div class="flex items-center space-x-4">
           <input type="text" id="user-input" placeholder="உங்கள் கேள்வியை இங்கு தட்டச்சு செய்யவும்..." class="flex-grow px-4 py-3 border border-gray-300 rounded-full focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
@@ -144,7 +144,7 @@
     </div>
   </main>
 
-  <!-- 🌸 Footer -->
+
   <footer class="bg-gray-100 border-t border-gray-300 text-center py-4 text-sm text-gray-600">
     <p class="mb-1">“தமிழ் பேசும் தொழில்நுட்பம், புதிய சிந்தனைகளின் தொடக்கம்”</p>
     <p>🚀 உருவாக்கியவர்கள்: <span class="font-semibold">பிரனேஷ் | நிரஞ்சன் | சந்தோஷ் குமார் | ஸ்ரீ வைஷ்ணவ்</span></p>
@@ -174,7 +174,7 @@
         bubble.className += " flex justify-center items-center";
         bubble.innerHTML = `<div class="chat-spinner"></div>`;
       } else {
-        // Use innerHTML to allow for bold text
+      
         bubble.innerHTML = text;
         if (!isUser) {
           const speakerIcon = document.createElement('div');
@@ -183,7 +183,7 @@
             <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.43 7-8.77s-2.99-7.86-7-8.77z"/>
           </svg>`;
           speakerIcon.addEventListener('click', () => {
-            // Use the text from the bubble for TTS, not the raw HTML
+           
             playAudio(bubble.textContent.trim(), speakerIcon);
           });
           bubble.appendChild(speakerIcon);
@@ -212,22 +212,22 @@
       const buffer = new ArrayBuffer(44 + dataLength);
       const view = new DataView(buffer);
 
-      // WAV header
-      view.setUint32(0, 0x46464952, true); // "RIFF"
-      view.setUint32(4, 36 + dataLength, true); // file size
-      view.setUint32(8, 0x45564157, true); // "WAVE"
-      view.setUint32(12, 0x20746d66, true); // "fmt "
-      view.setUint32(16, 16, true); // sub-chunk size
-      view.setUint16(20, 1, true); // audio format (1 = PCM)
-      view.setUint16(22, 1, true); // number of channels
-      view.setUint32(24, sampleRate, true); // sample rate
-      view.setUint32(28, sampleRate * 2, true); // byte rate
-      view.setUint16(32, 2, true); // block align
-      view.setUint16(34, 16, true); // bits per sample
-      view.setUint32(36, 0x61746164, true); // "data"
-      view.setUint32(40, dataLength, true); // data size
+  
+      view.setUint32(0, 0x46464952, true);
+      view.setUint32(4, 36 + dataLength, true); 
+      view.setUint32(8, 0x45564157, true);
+      view.setUint32(12, 0x20746d66, true); 
+      view.setUint32(16, 16, true); 
+      view.setUint16(20, 1, true); 
+      view.setUint16(22, 1, true); 
+      view.setUint32(24, sampleRate, true); 
+      view.setUint32(28, sampleRate * 2, true); 
+      view.setUint16(32, 2, true); 
+      view.setUint16(34, 16, true); 
+      view.setUint32(36, 0x61746164, true); 
+      view.setUint32(40, dataLength, true);
 
-      // Write PCM data
+   
       let offset = 44;
       for (let i = 0; i < pcm16.length; i++, offset += 2) {
         view.setInt16(offset, pcm16[i], true);
@@ -321,13 +321,13 @@
         return translatedText;
       } catch (err) {
         console.error("Translation error:", err);
-        return text; // Return the original text on error
+        return text; 
       }
     };
 
     const getGeminiResponse = async (userMessage) => {
       try {
-        // Updated prompt to get a JSON response with two fields
+        
         const prompt = `Analyze the user's message for its core topic and emotion.
         Based on the emotion, generate a short, powerful Tamil punch dialogue or proverb.
         Based on the core topic, generate a clear and concise main response in Tamil.
@@ -372,12 +372,12 @@
         const punchDialogue = parsedResponse.punchDialogue;
         const mainResponse = parsedResponse.mainResponse;
         
-        // Combine the two parts for display
+      
         return `<b>${punchDialogue}</b><br><br>${mainResponse}`;
         
       } catch (err) {
         console.error("Gemini error:", err);
-        return "மன்னிக்கவும், ஒரு பிழை ஏற்பட்டது."; // Sorry, an error occurred.
+        return "மன்னிக்கவும், ஒரு பிழை ஏற்பட்டது."; 
       }
     };
 
@@ -385,7 +385,7 @@
       const msg = userInput.value.trim();
       if (!msg) return;
 
-      // Translate the user's message to Tamil before displaying it
+     
       const userMsgInTamil = await translateText(msg);
       createMessage(userMsgInTamil, true);
       userInput.value = "";
@@ -397,7 +397,7 @@
         createMessage(reply);
       } catch (err) {
         loading.remove();
-        createMessage("மன்னிக்கவும், ஒரு பிழை ஏற்பட்டது."); // Sorry, an error occurred.
+        createMessage("மன்னிக்கவும், ஒரு பிழை ஏற்பட்டது."); 
       }
     };
 
@@ -409,13 +409,13 @@
       }
     });
 
-    // 🎙️ Speech-to-Text Logic
+  
     let recognition;
-    let isListening = false; // Add a state variable to track listening status
+    let isListening = false; 
 
     if ('SpeechRecognition' in window || 'webkitSpeechRecognition' in window) {
       recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
-      recognition.lang = 'ta-IN'; // Tamil language
+      recognition.lang = 'ta-IN'; 
       recognition.continuous = false;
       recognition.interimResults = false;
 
@@ -423,14 +423,14 @@
         if (!isListening) {
           try {
             micBtn.classList.add('mic-listening');
-            statusMessage.textContent = "🎙️ கேட்கிறது..."; // Listening...
+            statusMessage.textContent = "🎙️ கேட்கிறது..."; 
             recognition.start();
-            isListening = true; // Set the flag to true
+            isListening = true; 
           } catch (error) {
             console.error("Speech recognition error:", error);
-            statusMessage.textContent = "ஒரு பிழை ஏற்பட்டது. மைக்ரோஃபோன் அணுகலை சரிபார்க்கவும்."; // An error occurred. Check microphone access.
+            statusMessage.textContent = "ஒரு பிழை ஏற்பட்டது. மைக்ரோஃபோன் அணுகலை சரிபார்க்கவும்."; 
             micBtn.classList.remove('mic-listening');
-            isListening = false; // Reset the flag
+            isListening = false; 
           }
         }
       });
@@ -440,27 +440,28 @@
         userInput.value = transcript;
         micBtn.classList.remove('mic-listening');
         statusMessage.textContent = "🤖 தமிழில் கேள்விகளை கேட்கவும் - பதில்கள் தமிழிலேயே வரும்";
-        isListening = false; // Reset the flag
+        isListening = false; 
       };
 
       recognition.onerror = (event) => {
         console.error("Speech recognition error:", event.error);
-        statusMessage.textContent = "ஒரு பிழை ஏற்பட்டது. மீண்டும் முயற்சிக்கவும்."; // An error occurred. Please try again.
+        statusMessage.textContent = "ஒரு பிழை ஏற்பட்டது. மீண்டும் முயற்சிக்கவும்."; 
         micBtn.classList.remove('mic-listening');
-        isListening = false; // Reset the flag
+        isListening = false; 
       };
 
       recognition.onend = () => {
         micBtn.classList.remove('mic-listening');
         statusMessage.textContent = "🤖 தமிழில் கேள்விகளை கேட்கவும் - பதில்கள் தமிழிலேயே வரும்";
-        isListening = false; // Reset the flag
+        isListening = false; 
       };
 
     } else {
       micBtn.disabled = true;
       micBtn.classList.add('opacity-50', 'cursor-not-allowed');
-      statusMessage.textContent = "மன்னிக்கவும், இந்த உலாவி குரல் உள்ளீட்டை ஆதரிக்கவில்லை."; // Sorry, this browser does not support voice input.
+      statusMessage.textContent = "மன்னிக்கவும், இந்த உலாவி குரல் உள்ளீட்டை ஆதரிக்கவில்லை."; 
     }
   </script>
 </body>
 </html>
+
